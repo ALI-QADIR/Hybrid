@@ -23,7 +23,7 @@ void AMonk::Move(const FInputActionValue& InputActionValue)
 	AddMovementInput(FVector(1, 0, 0), MovementVector.X);
 
 	FRotator Rotation = FRotator(0, 0, 0);
-	Rotation.Yaw = MovementVector.X > 0 ? 0.0f : 180.f;
+	Rotation.Yaw = MovementVector.X > 0 ? 0.0f : MovementVector.X < 0 ? 180.0f : GetActorRotation().Yaw;
 
 	SetActorRotation(Rotation);
 }
