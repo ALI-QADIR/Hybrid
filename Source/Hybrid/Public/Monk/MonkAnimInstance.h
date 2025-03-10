@@ -1,0 +1,27 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "PaperZDAnimInstance.h"
+#include "MonkAnimInstance.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class HYBRID_API UMonkAnimInstance : public UPaperZDAnimInstance
+{
+	GENERATED_BODY()
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Animation Properties", meta=(AllowPrivateAccess = "true"))
+	bool bIsWalking;
+	
+	
+public:
+
+	UFUNCTION(BlueprintCallable, Category = "Animation")
+	void SetWalkingBool(bool isWalking);
+	
+};

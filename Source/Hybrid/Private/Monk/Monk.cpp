@@ -1,18 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Monk.h"
+#include "Monk/Monk.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "MonkController.h"
-#include "PaperFlipbookComponent.h"
-#include "Paper2D/Classes/PaperFlipbook.h"
+#include "Monk/MonkController.h"
+#include "Monk/MonkAnimationComponent.h"
 
 AMonk::AMonk()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	IdleFlipbook = NewObject<UPaperFlipbook>();
-	WalkFlipBook = NewObject<UPaperFlipbook>();
+	AnimationComponent = NewObject<UMonkAnimationComponent>(this, TEXT("AnimationComponent"));
 }
 
 void AMonk::Move(const FInputActionValue& InputActionValue)
@@ -30,12 +28,12 @@ void AMonk::Move(const FInputActionValue& InputActionValue)
 
 void AMonk::StartWalking(const FInputActionValue& InputActionValue)
 {
-	GetSprite()->SetFlipbook(WalkFlipBook);
+	AnimationComponent->SetWalkingBool(true);
 }
 
 void AMonk::StopWalking(const FInputActionValue& InputActionValue)
 {
-	GetSprite()->SetFlipbook(IdleFlipbook);
+	AnimationComponent->SetWalkingBool(false);
 }
 
 void AMonk::BeginPlay()

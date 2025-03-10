@@ -28,12 +28,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	
-private:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Flipbooks", meta=(AllowPrivateAccess = "true"))
-	class UPaperFlipbook* IdleFlipbook;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Flipbooks", meta=(AllowPrivateAccess = "true"))
-	class UPaperFlipbook* WalkFlipBook;
+	class UMonkAnimationComponent* AnimationComponent;
 };
