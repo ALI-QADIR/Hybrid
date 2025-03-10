@@ -25,5 +25,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Animation")
 	void SetWalkingBool(bool bIsWalking);
+
+	void SetAirBorneBool(bool bIsAirborne);
+
+	void SetFallingBool(bool bIsFalling);
 	
 };

@@ -4,16 +4,19 @@
 #include "Monk/Monk.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Monk/MonkController.h"
 #include "Monk/MonkAnimationComponent.h"
 
 AMonk::AMonk()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	AnimationComponent = NewObject<UMonkAnimationComponent>(this, TEXT("AnimationComponent"));
+	AnimationComponent = CreateDefaultSubobject<UMonkAnimationComponent>(TEXT("Animation Component"));
+
+	MaxJumpInputHoldTime = 0.5f;
 }
 
-void AMonk::Move(const FInputActionValue& InputActionValue)
+void AMonk::HandleMoveInput(const FInputActionValue& InputActionValue)
 {
 	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
 
@@ -36,9 +39,27 @@ void AMonk::StopWalking(const FInputActionValue& InputActionValue)
 	AnimationComponent->SetWalkingBool(false);
 }
 
+void AMonk::HandleJumpInput(const FInputActionInstance& InputActionValue)
+{
+	//ジャンプ　インプット
+	isJumpPressed = InputActionValue.GetValue().Get<bool>();
+	if (isJumpPressed) Jump();
+	else StopJumping();
+}
+
 void AMonk::BeginPlay()
 {
 	Super::BeginPlay();
+	JumpMaxHoldTime = MaxJumpInputHoldTime;
+	CMC = Cast<UCharacterMovementComponent>(GetCharacterMovement());
+}
+
+void AMonk::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	AnimationComponent->SetAirBorneBool(CMC->IsFalling());
+	bool bIsFalling = GetVelocity().Z < 0.f;
+	AnimationComponent->SetFallingBool(bIsFalling);
 }
 
 
@@ -51,9 +72,11 @@ void AMonk::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	if (EIC && MonkController)
 	{
-		EIC->BindAction(MonkController->MoveAction, ETriggerEvent::Triggered, this, &AMonk::Move);
+		EIC->BindAction(MonkController->MoveAction, ETriggerEvent::Triggered, this, &AMonk::HandleMoveInput);
 		EIC->BindAction(MonkController->MoveAction, ETriggerEvent::Started, this, &AMonk::StartWalking);
 		EIC->BindAction(MonkController->MoveAction, ETriggerEvent::Completed, this, &AMonk::StopWalking);
+		EIC->BindAction(MonkController->JumpAction, ETriggerEvent::Triggered, this, &AMonk::HandleJumpInput);
+		EIC->BindAction(MonkController->JumpAction, ETriggerEvent::Completed, this, &AMonk::HandleJumpInput);
 
 		ULocalPlayer* LocalPlayer = MonkController->GetLocalPlayer();
 		if (!LocalPlayer) return;

@@ -8,3 +8,14 @@ void UMonkAnimInstance::SetWalkingBool(bool isWalking)
 {
 	bIsWalking = isWalking;
 }
+
+void UMonkAnimInstance::SetAirBorneBool(bool isAirborne)
+{
+	bIsAirborne = isAirborne;
+}
+
+void UMonkAnimInstance::SetFallingBool(bool isFalling)
+{
+	bIsFalling = isFalling;
+}
+

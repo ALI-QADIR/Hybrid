@@ -7,6 +7,7 @@
 #include "PaperCharacter.h"
 #include "Monk.generated.h"
 
+struct FInputActionInstance;
 /**
  * 
  */
@@ -19,16 +20,26 @@ public:
 	
     AMonk();
 
-	void Move(const FInputActionValue& InputActionValue);
+	void HandleMoveInput(const FInputActionValue& InputActionValue);
 
 	void StartWalking(const FInputActionValue& InputActionValue);
 	void StopWalking(const FInputActionValue& InputActionValue);
+	void HandleJumpInput(const FInputActionInstance& InputActionValue);
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaSeconds) override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Flipbooks", meta=(AllowPrivateAccess = "true"))
 	class UMonkAnimationComponent* AnimationComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Flipbooks", meta=(AllowPrivateAccess = "true"))
+	float MaxJumpInputHoldTime;
+
+	UPROPERTY()
+	class UCharacterMovementComponent* CMC;
+	
+	bool isJumpPressed;
 };

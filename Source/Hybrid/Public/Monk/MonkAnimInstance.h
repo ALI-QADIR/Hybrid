@@ -15,13 +15,25 @@ class HYBRID_API UMonkAnimInstance : public UPaperZDAnimInstance
 	GENERATED_BODY()
 
 protected:
+
 	UPROPERTY(BlueprintReadOnly, Category = "Animation Properties", meta=(AllowPrivateAccess = "true"))
 	bool bIsWalking;
-	
+
+	UPROPERTY(BlueprintReadOnly, Category = "Animation Properties", meta=(AllowPrivateAccess = "true"))
+	bool bIsAirborne;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Animation Properties", meta=(AllowPrivateAccess = "true"))
+	bool bIsFalling;
 	
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Animation")
 	void SetWalkingBool(bool isWalking);
+
+	UFUNCTION(BlueprintCallable, Category = "Animation")
+	void SetAirBorneBool(bool isAirborne);
+
+	UFUNCTION(BlueprintCallable, Category = "Animation")
+	void SetFallingBool(bool isFalling);
 	
 };

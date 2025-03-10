@@ -16,3 +16,15 @@ void UMonkAnimationComponent::SetWalkingBool(bool bIsWalking)
 	if (!MonkAnimInstance) return;
 	MonkAnimInstance->SetWalkingBool(bIsWalking);
 }
+
+void UMonkAnimationComponent::SetAirBorneBool(bool bIsAirborne)
+{
+	if (!MonkAnimInstance) return;
+	MonkAnimInstance->SetAirBorneBool(bIsAirborne);
+}
+
+void UMonkAnimationComponent::SetFallingBool(bool bIsFalling)
+{
+	if (!MonkAnimInstance) return;
+	MonkAnimInstance->SetFallingBool(bIsFalling);
+}
