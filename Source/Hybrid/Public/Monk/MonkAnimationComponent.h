@@ -29,5 +29,7 @@ public:
 	void SetAirBorneBool(bool bIsAirborne);
 
 	void SetFallingBool(bool bIsFalling);
+
+	void SetOwningActorInAnimInstance(class AMonk* OwningActor);
 	
 };

@@ -28,3 +28,8 @@ void UMonkAnimationComponent::SetFallingBool(bool bIsFalling)
 	if (!MonkAnimInstance) return;
 	MonkAnimInstance->SetFallingBool(bIsFalling);
 }
+
+void UMonkAnimationComponent::SetOwningActorInAnimInstance(AMonk* OwningActor)
+{
+	MonkAnimInstance->SetOwningCharacter(OwningActor);
+}

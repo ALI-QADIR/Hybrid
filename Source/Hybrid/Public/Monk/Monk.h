@@ -27,6 +27,8 @@ public:
 	void HandleJumpInput(const FInputActionInstance& InputActionValue);
 	void HandlePunchInput(const FInputActionInstance& InputActionValue);
 
+	void HandlePunchImpactNotif();
+
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 protected:
@@ -47,6 +49,7 @@ protected:
 	
 	UFUNCTION(BlueprintCallable, Category = "State Events")
 	void SetIsAttacking(bool isAttacking);
+
 	
 	bool isJumpPressed;
 	bool bIsAttacking;

@@ -59,12 +59,19 @@ void AMonk::HandlePunchInput(const FInputActionInstance& InputActionValue)
 	PunchTriggered();
 }
 
+void AMonk::HandlePunchImpactNotif()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandlePunchImpactNotif"));
+	//TODO
+}
+
 
 void AMonk::BeginPlay()
 {
 	Super::BeginPlay();
 	JumpMaxHoldTime = MaxJumpInputHoldTime;
 	CMC = Cast<UCharacterMovementComponent>(GetCharacterMovement());
+	AnimationComponent->SetOwningActorInAnimInstance(this);
 }
 
 void AMonk::Tick(float DeltaSeconds)

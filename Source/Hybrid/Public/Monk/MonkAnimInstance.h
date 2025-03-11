@@ -24,6 +24,12 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Animation Properties", meta=(AllowPrivateAccess = "true"))
 	bool bIsFalling;
+
+	UFUNCTION(BlueprintCallable, Category = "Animation Events")
+	void HandlePunchImpact();
+
+	UPROPERTY()
+	class AMonk* OwnerCharacter;
 	
 public:
 
@@ -36,4 +42,5 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Animation")
 	void SetFallingBool(bool isFalling);
 	
+	void SetOwningCharacter(class AMonk* OwningCharacter);
 };
