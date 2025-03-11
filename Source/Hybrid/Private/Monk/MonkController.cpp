@@ -10,6 +10,7 @@ AMonkController::AMonkController()
 	InputMappingContext = NewObject<UInputMappingContext>(this, TEXT("Input Mapping Context"));
 	MoveAction = NewObject<UInputAction>(this, TEXT("Move Action"));
 	JumpAction = NewObject<UInputAction>(this, TEXT("Jump Action"));
+	PunchAction = NewObject<UInputAction>(this, TEXT("Punch Action"));
 }
 
 

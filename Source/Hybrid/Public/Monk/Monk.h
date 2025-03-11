@@ -25,6 +25,7 @@ public:
 	void StartWalking(const FInputActionValue& InputActionValue);
 	void StopWalking(const FInputActionValue& InputActionValue);
 	void HandleJumpInput(const FInputActionInstance& InputActionValue);
+	void HandlePunchInput(const FInputActionInstance& InputActionValue);
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -39,7 +40,14 @@ protected:
 	float MaxJumpInputHoldTime;
 
 	UPROPERTY()
-	class UCharacterMovementComponent* CMC;
+	UCharacterMovementComponent* CMC;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Input Events")
+	void PunchTriggered();
+	
+	UFUNCTION(BlueprintCallable, Category = "State Events")
+	void SetIsAttacking(bool isAttacking);
 	
 	bool isJumpPressed;
+	bool bIsAttacking;
 };
