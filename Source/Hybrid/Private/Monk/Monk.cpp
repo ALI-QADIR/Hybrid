@@ -20,7 +20,6 @@ AMonk::AMonk()
 void AMonk::HandleMoveInput(const FInputActionValue& InputActionValue)
 {
 	if (bIsAttacking) return;
-	AnimationComponent->SetWalkingBool(true);
 	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
 
 	AddMovementInput(FVector(0, 1, 0), MovementVector.Y);
@@ -34,13 +33,11 @@ void AMonk::HandleMoveInput(const FInputActionValue& InputActionValue)
 
 void AMonk::StartWalking(const FInputActionValue& InputActionValue)
 {
-	if (bIsAttacking) return;
 	AnimationComponent->SetWalkingBool(true);
 }
 
 void AMonk::StopWalking(const FInputActionValue& InputActionValue)
 {
-	if (bIsAttacking) return;
 	AnimationComponent->SetWalkingBool(false);
 }
 
@@ -59,12 +56,43 @@ void AMonk::HandlePunchInput(const FInputActionInstance& InputActionValue)
 	PunchTriggered();
 }
 
+void AMonk::HandleKickInput(const FInputActionInstance& InputActionValue)
+{
+	if (bIsAttacking) return;
+	if (CMC->IsFalling()) JumpKickTriggered();
+	else KickTriggered();
+}
+
+void AMonk::HandleHighKickInput(const FInputActionInstance& InputActionValue)
+{
+	if (bIsAttacking) return;
+	if (CMC->IsFalling()) JumpKickTriggered();
+	else HighKickTriggered();
+}
+
 void AMonk::HandlePunchImpactNotif()
 {
 	UE_LOG(LogTemp, Warning, TEXT("HandlePunchImpactNotif"));
 	//TODO
 }
 
+void AMonk::HandleJumpKickImpactNotif()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleJumpKickImpactNotif"));
+	//TODO
+}
+
+void AMonk::HandleHighKickImpactNotif()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleHighKickImpactNotif"));
+	//TODO
+}
+
+void AMonk::HandleMidKickImpactNotif()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleMidKickImpactNotif"));
+	//TODO
+}
 
 void AMonk::BeginPlay()
 {
@@ -104,6 +132,8 @@ void AMonk::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EIC->BindAction(MonkController->JumpAction, ETriggerEvent::Completed, this, &AMonk::HandleJumpInput);
 
 		EIC->BindAction(MonkController->PunchAction, ETriggerEvent::Started, this, &AMonk::HandlePunchInput);
+		EIC->BindAction(MonkController->KickAction, ETriggerEvent::Started, this, &AMonk::HandleKickInput);
+		EIC->BindAction(MonkController->HighKickAction, ETriggerEvent::Started, this, &AMonk::HandleHighKickInput);
 
 		ULocalPlayer* LocalPlayer = MonkController->GetLocalPlayer();
 		if (!LocalPlayer) return;

@@ -11,6 +11,8 @@ AMonkController::AMonkController()
 	MoveAction = NewObject<UInputAction>(this, TEXT("Move Action"));
 	JumpAction = NewObject<UInputAction>(this, TEXT("Jump Action"));
 	PunchAction = NewObject<UInputAction>(this, TEXT("Punch Action"));
+	KickAction = NewObject<UInputAction>(this, TEXT("Kick Action"));
+	KickAction = NewObject<UInputAction>(this, TEXT("High Kick Action"));
 }
 
 

@@ -26,8 +26,13 @@ public:
 	void StopWalking(const FInputActionValue& InputActionValue);
 	void HandleJumpInput(const FInputActionInstance& InputActionValue);
 	void HandlePunchInput(const FInputActionInstance& InputActionValue);
+	void HandleKickInput(const FInputActionInstance& InputActionValue);
+	void HandleHighKickInput(const FInputActionInstance& InputActionValue);
 
 	void HandlePunchImpactNotif();
+	void HandleMidKickImpactNotif();
+	void HandleJumpKickImpactNotif();
+	void HandleHighKickImpactNotif();
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -46,10 +51,18 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Input Events")
 	void PunchTriggered();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Input Events")
+	void KickTriggered();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Input Events")
+	void JumpKickTriggered();
 	
+	UFUNCTION(BlueprintImplementableEvent, Category = "Input Events")
+	void HighKickTriggered();
+
 	UFUNCTION(BlueprintCallable, Category = "State Events")
 	void SetIsAttacking(bool isAttacking);
-
 	
 	bool isJumpPressed;
 	bool bIsAttacking;

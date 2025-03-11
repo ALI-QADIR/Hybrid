@@ -9,6 +9,21 @@ void UMonkAnimInstance::HandlePunchImpact()
 	OwnerCharacter->HandlePunchImpactNotif();
 }
 
+void UMonkAnimInstance::HandleMidKickImpact()
+{
+	OwnerCharacter->HandleMidKickImpactNotif();
+}
+
+void UMonkAnimInstance::HandleJumpKickImpact()
+{
+	OwnerCharacter->HandleJumpKickImpactNotif();
+}
+
+void UMonkAnimInstance::HandleHighKickImpact()
+{
+	OwnerCharacter->HandleHighKickImpactNotif();
+}
+
 void UMonkAnimInstance::SetWalkingBool(bool isWalking)
 {
 	bIsWalking = isWalking;

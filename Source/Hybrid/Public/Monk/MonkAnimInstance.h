@@ -25,11 +25,20 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Animation Properties", meta=(AllowPrivateAccess = "true"))
 	bool bIsFalling;
 
-	UFUNCTION(BlueprintCallable, Category = "Animation Events")
-	void HandlePunchImpact();
-
 	UPROPERTY()
 	class AMonk* OwnerCharacter;
+
+	UFUNCTION(BlueprintCallable, Category = "Animation Events")
+	void HandlePunchImpact();
+	
+	UFUNCTION(BlueprintCallable, Category = "Animation Events")
+	void HandleMidKickImpact();
+	
+	UFUNCTION(BlueprintCallable, Category = "Animation Events")
+	void HandleJumpKickImpact();
+	
+	UFUNCTION(BlueprintCallable, Category = "Animation Events")
+	void HandleHighKickImpact();
 	
 public:
 
